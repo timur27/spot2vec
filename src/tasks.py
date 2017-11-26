@@ -31,11 +31,11 @@ def resolve_playlist(user_id, playlist_id):
     track_to_json(user_id, playlist_id, tracks)
 
 
-def track_to_json(user_id,playlist_id,artist_sentence):
+def track_to_json(user_id,playlist_id,track):
     obj = json.dumps({
         'user_id': user_id,
         'playlist_id': playlist_id,
-        'sentence': artist_sentence,
+        'sentence': track,
         })
 
     print(obj)
