@@ -1,15 +1,16 @@
 import json
 import os
+import requests
 
 import spotipy
 
 from oauth import get_api_client
+from spotipy.client import SpotifyException
 
 def playlist_generator(term, search_type='query',
-                       offset=0, limit=50):
+                       offset=0):
     api = get_api_client()
-    results = api.search(term, type='playlist', offset=offset,
-                             limit=limit)
+    results = api.search(term, type='playlist', offset=offset)
         
     playlists=results['playlists']['items']
 
@@ -20,16 +21,13 @@ def playlist_generator(term, search_type='query',
     
 def resolve_playlist(user_id, playlist_id):
     api = get_api_client()
-
-    playlist_tracks = api.user_playlist_tracks(user_id, playlist_id, limit=50)
-
-    tracks = []
     
-    for track in playlist_tracks['items']:
-            tracks.append(track['track']['id'])
-
-    track_to_json(user_id, playlist_id, tracks)
-
+    while (True):
+        playlist_tracks = api.user_playlist_tracks(user_id, playlist_id, limit=50)
+        for track in playlist_tracks['items']:
+            print(track['track']['id'])
+        
+        
 
 def track_to_json(user_id,playlist_id,track):
     obj = json.dumps({
