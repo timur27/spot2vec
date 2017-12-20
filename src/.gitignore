@@ -1,0 +1,7 @@
+# spotify credentials
+credentials.py
+
+# database
+*.json
+
+__pycache__/
