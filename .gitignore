@@ -1,5 +1,5 @@
 # spotify credentials
-credentials.py
+src/credentials.py
 
 # database
 *.json
